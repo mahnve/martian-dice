@@ -23,9 +23,8 @@
   (defroute "/" []
     (re-frame/dispatch [::events/set-active-panel :home-panel]))
 
-  (defroute "/about" []
-    (re-frame/dispatch [::events/set-active-panel :about-panel]))
-
+  (defroute "/new" []
+    (re-frame/dispatch [::events/start-new-game]))
 
   ;; --------------------
   (hook-browser-navigation!))

@@ -5,7 +5,8 @@
                  [re-frame "0.10.2"]
                  [secretary "1.2.3"]
                  [garden "1.3.2"]
-                 [ns-tracker "0.3.0"]]
+                 [ns-tracker "0.3.0"]
+                 [com.rpl/specter "1.0.4"]]
 
   :plugins [[lein-cljsbuild "1.1.5"]
             [lein-garden "0.2.8"]]
@@ -32,7 +33,6 @@
    {:dependencies [[binaryage/devtools "0.9.4"]
                    [cljsjs/d3 "4.3.0-5"]
                    [day8.re-frame/trace "0.1.7"]
-                   
                    [figwheel-sidecar "0.5.13"]
                    [com.cemerick/piggieback "0.2.2"]]
 
