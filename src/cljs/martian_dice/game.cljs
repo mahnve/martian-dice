@@ -2,14 +2,12 @@
 
 (defn roll-die []
   (let [die (rand-int 6)]
-   (cond
-        (= die 0) :blast
-        (= die 1) :chicken
-        (= die 2) :cow
-        (= die 3) :human
-        :else :spaceship)))
+    (case die
+      0 :blast
+      1 :chicken
+      2 :cow
+      3 :human
+      :spaceship)))
 
 (defn roll-dice [number]
   (frequencies (repeatedly number roll-die)))
-
-
