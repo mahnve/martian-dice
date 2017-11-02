@@ -14,34 +14,49 @@
 
 (defn players-component []
   (let [players (rf/subscribe [::subs/players])]
-    (.log js/console @players)
     [:div
      [:h2 "Players"]
      [:ul
-      (for [player @players]
-        [:dl {:key (:id player)}
-         [:dt "Name:"]
-         [:dd (:name player)]
-         [:dt "Score"]
-         [:dd (:score player)]])]]))
+      (for [{:keys [:name :score]} @players]
+        [:li{:key name}
+         [:label "Name:"]
+         [:p name]
+         [:label "Score"]
+         [:p score]])]]))
 
 (defn roll-dice-component []
   [:div
    [:button {:on-click #(rf/dispatch [::events/roll-dice])}  "Roll dice"]])
 
+(defn end-round-component []
+  [:div
+   [:button {:on-click #(rf/dispatch [::events/end-round])} "End Round"]])
+
+
+(defn is-selected? [type selected-type]
+  (.log js/console type)
+  (if (= type selected-type)
+    "selected"
+    "unselected"))
+
 (defn last-roll-component []
-  (let [last-roll (rf/subscribe [::subs/latest-roll])]
+  (let [last-roll @(rf/subscribe [::subs/latest-roll])
+        selected-dice @(rf/subscribe [::subs/selected-dice])]
     [:div.last-roll
      [:ul
-      (for [result @last-roll]
-        (str (first result)
-             (second result)))]]))
+      (for [[dice no-of-dice] last-roll]
+        [:li {:on-click #(rf/dispatch [::events/select-dice dice])
+              :class (is-selected? dice selected-dice)
+              :key (str dice)}
+         [:p  dice]
+         [:p no-of-dice]])]]))
 
 (defn game-panel []
   [:div "This is the Game Page."
    (players-component)
    (last-roll-component)
    (roll-dice-component)
+   (end-round-component)
    ])
 
 ;; main

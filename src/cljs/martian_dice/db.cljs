@@ -3,6 +3,7 @@
 (def new-game
   {:current-player "Foo Bar"
    :no-of-dice 14
+   :selected-dice nil
    :saved-dice {:cow 0
                 :human 0
                 :chicken 0

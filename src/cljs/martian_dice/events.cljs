@@ -14,6 +14,16 @@
    (assoc-in db [:view-state :active-panel] active-panel)))
 
 (rf/reg-event-db
+ ::select-dice
+ (fn [db [_ dice-type]]
+   (assoc-in db [:game :selected-dice] dice-type)))
+
+;; (rf/reg-event-db
+;;  ::end-round
+;;  (fn [db _]
+;;    (assoc db :game (game/end-round (:game db)))))
+
+(rf/reg-event-db
  ::roll-dice
  (fn [db _]
    (assoc-in db
