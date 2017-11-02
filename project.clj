@@ -31,6 +31,7 @@
   :profiles
   {:dev
    {:dependencies [[binaryage/devtools "0.9.4"]
+                   [org.clojure/test.check "0.9.0"]
                    [cljsjs/d3 "4.3.0-5"]
                    [day8.re-frame/trace "0.1.7"]
                    [figwheel-sidecar "0.5.13"]
@@ -41,7 +42,7 @@
   :cljsbuild
   {:builds
    [{:id           "dev"
-     :source-paths ["src/cljs"]
+     :source-paths ["src/cljs" "test/cljs"]
      :figwheel     {:on-jsload "martian-dice.core/mount-root"}
      :compiler     {:main                 martian-dice.core
                     :output-to            "resources/public/js/compiled/app.js"
@@ -60,9 +61,4 @@
                     :output-to       "resources/public/js/compiled/app.js"
                     :optimizations   :advanced
                     :closure-defines {goog.DEBUG false}
-                    :pretty-print    false}}
-
-
-    ]}
-
-  )
+                    :pretty-print    false}}]})
