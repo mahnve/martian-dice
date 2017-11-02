@@ -1,6 +1,9 @@
 (ns martian-dice.css
-  (:require [garden.def :refer [defstyles]]))
+  (:require [garden.def :refer [defstyles]]
+            [garden.selectors :as gs]))
+
+(gs/defclass selected)
 
 (defstyles screen
-  [:body {:color "red"}]
-)
+  [:li {:list-style :none}
+   [:&.selected {:background-color :#DDD}]])
