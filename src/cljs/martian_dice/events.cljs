@@ -30,9 +30,10 @@
              [:game :latest-roll]
              (game/roll-dice 15))))
 
+
 (rf/reg-event-db
  ::start-new-game
  (fn [db _]
    (-> db 
        (assoc-in [:view-state :active-panel] :game-panel)
-       (assoc :game db/new-game))))
+       (assoc :game game/new-game))))
