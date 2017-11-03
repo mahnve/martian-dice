@@ -34,7 +34,7 @@
 
 
 (defn is-selected? [dice selected-dice]
-  (if (or (= dice selected-dice) (= dice :blast))
+  (if (or (= dice selected-dice) (= dice ::blast))
     "selected"
     "unselected"))
 
