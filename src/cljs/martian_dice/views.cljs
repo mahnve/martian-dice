@@ -33,8 +33,8 @@
    [:button {:on-click #(rf/dispatch [::events/end-round])} "End Round"]])
 
 
-(defn is-selected? [dice selected-dice]
-  (if (or (= dice selected-dice) (= dice ::blast))
+(defn is-selected? [die selected-dice]
+  (if (some #{die} selected-dice)
     "selected"
     "unselected"))
 

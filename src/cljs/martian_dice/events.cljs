@@ -15,8 +15,8 @@
 
 (rf/reg-event-db
  ::select-dice
- (fn [db [_ dice-type]]
-   (assoc-in db [:game :selected-dice] dice-type)))
+ (fn [{:keys [game] :as db} [_ dice-type]] 
+   (db/update-game db #(game/select-dice game dice-type))))
 
 ;; (rf/reg-event-db
 ;;  ::end-round
@@ -25,15 +25,13 @@
 
 (rf/reg-event-db
  ::roll-dice
- (fn [db _]
-   (assoc-in db
-             [:game :latest-roll]
-             (game/roll-dice 15))))
+ (fn [db _] (db/update-game db game/roll-dice)))
+
 
 
 (rf/reg-event-db
  ::start-new-game
  (fn [db _]
-   (-> db 
+   (-> db
        (assoc-in [:view-state :active-panel] :game-panel)
        (assoc :game game/new-game))))

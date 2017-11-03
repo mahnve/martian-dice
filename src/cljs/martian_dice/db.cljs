@@ -1,6 +1,9 @@
 (ns martian-dice.db
   (:require [martian-dice.game.game :as game]))
 
+(defn update-game
+  ([db f]
+   (assoc db :game (f (:game db)))))
 
 (def default-db
   {:name "martian-dice"
