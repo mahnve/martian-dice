@@ -10,6 +10,24 @@
 (defn selected-dice [game]
   [(get game :selected-dice) ::dice/blast] )
 
+(defn save-selected-dice
+  [{:keys [:selected-dice] :as game}]
+  (assoc-in game
+            [:saved-dice selected-dice]
+            (get-in game [:latest-roll selected-dice])))
+
+(defn clear-latest-roll [game]
+  (assoc game :latest-roll dice/empty-dice-set))
+
+
+(defn saved-dice [game]
+  (:saved-dice game))
+
+(defn end-round [game]
+  (-> game
+      (save-selected-dice)
+      (clear-latest-roll)))
+
 (def new-game
   {:current-player "Foo Bar"
    :no-of-dice 14
@@ -19,4 +37,3 @@
    :players [{:name "Foo Bar"
               :score 0}]})
 
-(defn end-round [game])

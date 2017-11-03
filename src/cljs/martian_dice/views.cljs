@@ -32,6 +32,13 @@
   [:div
    [:button {:on-click #(rf/dispatch [::events/end-round])} "End Round"]])
 
+(defn saved-dice-component []
+  (let [saved-dice @(rf/subscribe [::subs/saved-dice])]
+    [:ul
+     (for [[dice no-of-dice] saved-dice]
+       [:li 
+        [:p  dice]
+        [:p no-of-dice]])]))
 
 (defn is-selected? [die selected-dice]
   (if (some #{die} selected-dice)
@@ -56,6 +63,7 @@
    (last-roll-component)
    (roll-dice-component)
    (end-round-component)
+   (saved-dice-component)
    ])
 
 ;; main

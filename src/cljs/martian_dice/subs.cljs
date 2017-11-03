@@ -10,8 +10,13 @@
 
 (rf/reg-sub
  ::selected-dice
- (fn [db _]
-   (game/selected-dice (:game db))))
+ (fn [{:keys [:game]} _]
+   (game/selected-dice game)))
+
+(rf/reg-sub
+ ::saved-dice
+ (fn [{:keys [:game]} _]
+   (game/saved-dice game)))
 
 (rf/reg-sub
  ::players

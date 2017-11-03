@@ -18,10 +18,10 @@
  (fn [{:keys [game] :as db} [_ dice-type]] 
    (db/update-game db #(game/select-dice game dice-type))))
 
-;; (rf/reg-event-db
-;;  ::end-round
-;;  (fn [db _]
-;;    (assoc db :game (game/end-round (:game db)))))
+(rf/reg-event-db
+ ::end-round
+ (fn [db _]
+   (db/update-game db game/end-round)))
 
 (rf/reg-event-db
  ::roll-dice
