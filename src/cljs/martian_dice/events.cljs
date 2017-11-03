@@ -1,7 +1,7 @@
 (ns martian-dice.events
   (:require [re-frame.core :as rf]
             [martian-dice.db :as db]
-            [martian-dice.game :as game]))
+            [martian-dice.game.game :as game]))
 
 (rf/reg-event-db
  ::initialize-db

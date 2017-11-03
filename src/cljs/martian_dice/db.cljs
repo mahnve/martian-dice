@@ -1,5 +1,5 @@
 (ns martian-dice.db
-  (:require [martian-dice.game :as game]))
+  (:require [martian-dice.game.game :as game]))
 
 
 (def default-db

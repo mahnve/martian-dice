@@ -1,4 +1,4 @@
-(ns martian-dice.game
+(ns martian-dice.game.game
   (:require [cljs.spec.alpha :as s]
             [cljs.spec.gen.alpha :as gen]))
 
@@ -14,17 +14,14 @@
 (s/fdef roll-die
         :ret ::dice)
 
-(s/gen ::dice)
-
 (defn roll-die []
   (let [die (rand-int 6)]
     (case die
-      0 :blast
-      1 :chicken
-      2 :cow
-      3 :human
-      :spaceship)))
-
+      0 ::blast
+      1 ::chicken
+      2 ::cow
+      3 ::human
+      ::spaceship)))
 
 (def empty-dice-set
   {::cow 0
@@ -32,6 +29,7 @@
    ::chicken 0
    ::blast 0
    ::spaceship 0})
+
 
 
 
@@ -43,7 +41,6 @@
    :latest-roll empty-dice-set
    :players [{:name "Foo Bar"
               :score 0}]})
-
 
 (defn roll-dice [number]
   (frequencies (repeatedly number roll-die)))
