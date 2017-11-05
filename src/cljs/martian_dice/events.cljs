@@ -19,7 +19,7 @@
    (db/with-game db #(game/select-dice game dice-type))))
 
 (rf/reg-event-db
- ::end-round
+ ::end-turn
  (fn [db _]
    (db/with-game db game/end-round)))
 
@@ -27,7 +27,9 @@
  ::roll-dice
  (fn [db _] (db/with-game db game/roll-dice)))
 
-
+(rf/reg-event-db
+ ::new-game
+ (fn [db _] (db/update-game db game/new-game)))
 
 (rf/reg-event-db
  ::start-new-game

@@ -28,9 +28,13 @@
   [:div
    [:button {:on-click #(rf/dispatch [::events/roll-dice])}  "Roll dice"]])
 
-(defn end-round-component []
+(defn new-game-component []
   [:div
-   [:button {:on-click #(rf/dispatch [::events/end-round])} "End Round"]])
+   [:button {:on-click #(rf/dispatch [::events/new-game])} "New game"]])
+
+(defn end-turn-component []
+  [:div
+   [:button {:on-click #(rf/dispatch [::events/end-turn])} "End Turn"]])
 
 (defn saved-dice-component []
   (let [saved-dice @(rf/subscribe [::subs/saved-dice])]
@@ -62,7 +66,8 @@
    (players-component)
    (last-roll-component)
    (roll-dice-component)
-   (end-round-component)
+   (end-turn-component)
+   (new-game-component)
    (saved-dice-component)
    ])
 
