@@ -11,21 +11,21 @@
 (rf/reg-event-db
  ::set-active-panel
  (fn [db [_ active-panel]]
-   (assoc-in db [:view-state :active-panel] active-panel)))
+   (db/with-view db active-panel)))
 
 (rf/reg-event-db
  ::select-dice
  (fn [{:keys [game] :as db} [_ dice-type]] 
-   (db/update-game db #(game/select-dice game dice-type))))
+   (db/with-game db #(game/select-dice game dice-type))))
 
 (rf/reg-event-db
  ::end-round
  (fn [db _]
-   (db/update-game db game/end-round)))
+   (db/with-game db game/end-round)))
 
 (rf/reg-event-db
  ::roll-dice
- (fn [db _] (db/update-game db game/roll-dice)))
+ (fn [db _] (db/with-game db game/roll-dice)))
 
 
 
@@ -33,5 +33,5 @@
  ::start-new-game
  (fn [db _]
    (-> db
-       (assoc-in [:view-state :active-panel] :game-panel)
-       (assoc :game game/new-game))))
+       (db/with-view :game-panel)
+       (db/with-game game/new-game))))

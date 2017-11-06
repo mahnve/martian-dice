@@ -28,7 +28,7 @@
       (save-selected-dice)
       (clear-latest-roll)))
 
-(def new-game
+(defn new-game [_]
   {:current-player "Foo Bar"
    :no-of-dice 14
    :selected-dice nil
