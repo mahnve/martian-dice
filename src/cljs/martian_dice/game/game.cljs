@@ -10,18 +10,18 @@
 (defn selected-dice [game]
   [(get game :selected-dice) ::dice/blast] )
 
-(defn no-of-dice [game type]
+(defn no-of-dice [game selected-dice]
   (get-in game [:latest-roll selected-dice]))
 
 (defn can-select-dice [game dice]
-  (> 0 (no-of-dice game dice)))
+  (> (no-of-dice game dice) 0)
 
-(defn save-selected-dice
-  [{:keys [:selected-dice] :as game}]
-  (if (can-select-dice game selected-dice)
-    (assoc-in game
-              [:saved-dice selected-dice]
-              (no-of-dice game selected-dice))))
+  (defn save-selected-dice
+    [{:keys [:selected-dice] :as game}]
+    (if (can-select-dice game selected-dice)
+      (assoc-in game
+                [:saved-dice selected-dice]
+                (no-of-dice game selected-dice)))))
 
 (defn clear-latest-roll [game]
   (assoc game :latest-roll dice/empty-dice-set))

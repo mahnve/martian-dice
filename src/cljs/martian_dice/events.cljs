@@ -21,7 +21,7 @@
 (rf/reg-event-db
  ::end-turn
  (fn [db _]
-   (db/with-game db game/end-round)))
+   (db/with-game db game/end-turn)))
 
 (rf/reg-event-db
  ::roll-dice
@@ -29,7 +29,7 @@
 
 (rf/reg-event-db
  ::new-game
- (fn [db _] (db/update-game db game/new-game)))
+ (fn [db _] (db/with-game db game/new-game)))
 
 (rf/reg-event-db
  ::start-new-game
