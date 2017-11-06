@@ -4,8 +4,8 @@
                  [reagent "0.7.0"]
                  [re-frame "0.10.2"]
                  [secretary "1.2.3"]
-                 [garden "1.3.2"]
-                 [ns-tracker "0.3.0"]
+                 [garden "1.3.3"]
+                 [ns-tracker "0.3.1"]
                  [com.rpl/specter "1.0.4"]]
 
   :plugins [[lein-cljsbuild "1.1.5"]
@@ -30,14 +30,15 @@
 
   :profiles
   {:dev
-   {:dependencies [[binaryage/devtools "0.9.4"]
+   {:dependencies [[binaryage/devtools "0.9.7"]
                    [org.clojure/test.check "0.9.0"]
                    [cljsjs/d3 "4.3.0-5"]
-                   [day8.re-frame/trace "0.1.7"]
-                   [figwheel-sidecar "0.5.13"]
+                   [day8.re-frame/trace "0.1.11"]
+                   [figwheel-sidecar "0.5.14"]
                    [com.cemerick/piggieback "0.2.2"]]
 
-    :plugins      [[lein-figwheel "0.5.13"]]}}
+    :plugins      [[lein-figwheel "0.5.14"]
+                   [lein-ancient "0.6.14"]]}}
 
   :cljsbuild
   {:builds
