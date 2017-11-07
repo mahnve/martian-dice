@@ -5,8 +5,7 @@
                  [re-frame "0.10.2"]
                  [secretary "1.2.3"]
                  [garden "1.3.3"]
-                 [ns-tracker "0.3.1"]
-                 [com.rpl/specter "1.0.4"]]
+                 [ns-tracker "0.3.1"]]
 
   :plugins [[lein-cljsbuild "1.1.5"]
             [lein-garden "0.2.8"]]
