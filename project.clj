@@ -41,6 +41,7 @@
                    [com.cemerick/piggieback "0.2.2"]]
 
     :plugins      [[lein-figwheel "0.5.14"]
+                   [lein-kibit "0.1.5"]
                    [lein-ancient "0.6.14"]]}}
 
   :cljsbuild
@@ -50,7 +51,7 @@
      :figwheel     {:on-jsload "martian-dice.core/mount-root"}
      :compiler     {:main                 martian-dice.core
                     :output-to            "resources/public/js/compiled/app.js"
-                    :output-dir           "resources/public/js/compiled/out"
+                    :output-dir           "resources/public/js/compiled/dev-out"
                     :asset-path           "js/compiled/out"
                     :source-map-timestamp true
                     :preloads             [devtools.preload
