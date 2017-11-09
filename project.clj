@@ -8,6 +8,7 @@
                  [ns-tracker "0.3.1"]]
 
   :plugins [[lein-cljsbuild "1.1.5"]
+            [lein-doo "0.1.8"]
             [lein-garden "0.2.8"]]
 
   :min-lein-version "2.5.3"
@@ -28,7 +29,10 @@
   :repl-options {:nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
 
   :profiles
-  {:dev
+  {:doo
+   {:build "test"
+    }
+   :dev
    {:dependencies [[binaryage/devtools "0.9.7"]
                    [org.clojure/test.check "0.9.0"]
                    [cljsjs/d3 "4.3.0-5"]
@@ -54,11 +58,18 @@
                     :closure-defines      {"re_frame.trace.trace_enabled_QMARK_" true}
                     :external-config      {:devtools/config {:features-to-install :all}}
                     }}
+    {:id "test"
+     :source-paths ["src/cljs" "test/cljs"]
+     :compiler {:output-to "resources/public/js/testable.js"
+                :output-dir "resources/public/js/compiled/test-out"
+                :main martian-dice.runner
+                :optimizations :none}}
 
     {:id           "min"
      :source-paths ["src/cljs"]
      :compiler     {:main            martian-dice.core
                     :output-to       "resources/public/js/compiled/app.js"
+                    :output-dir       "resources/public/js/compiled/min-out"
                     :optimizations   :advanced
                     :closure-defines {goog.DEBUG false}
                     :pretty-print    false}}]})
