@@ -3,7 +3,7 @@
 
 (defn with-game
   ([db f]
-   (assoc db :game (f (:game db)))))
+   (update db :game f (:game db))))
 
 (defn with-view [db view-panel]
   (assoc-in db [:view-state :active-panel] view-panel))
