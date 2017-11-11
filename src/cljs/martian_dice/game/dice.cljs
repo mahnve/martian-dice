@@ -33,9 +33,8 @@
 
 (defn roll-dice [number]
   (let [number (min 100 number)]
-    (into )
-    (frequencies (repeatedly number roll-die))))
-
+    (into empty-dice-set 
+          (frequencies (repeatedly number roll-die)))))
 
 (def empty-dice-set
   {::cow 0

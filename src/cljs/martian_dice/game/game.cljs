@@ -27,6 +27,10 @@
 (defn select-dice [game dice]
   (assoc game :selected-dice dice))
 
+(s/fdef selected-dice
+        :args (s/cat)
+        :ret ::dice/die-side)
+
 (defn selected-dice [game]
   [(get game :selected-dice) ::dice/blast] )
 
