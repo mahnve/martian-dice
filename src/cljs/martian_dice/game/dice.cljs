@@ -5,9 +5,14 @@
 
 (s/def ::score (s/or :positive pos-int? :zero zero?) )
 
-(s/def ::die-side #{:cow :human :chicken :blast :spaceship})
+(s/def ::blast ::score)
+(s/def ::chicken ::score)
+(s/def ::cow ::score)
+(s/def ::human ::score)
+(s/def ::spaceship ::score)
 
-(s/def ::dice (s/map-of ::die-side ::score))
+(s/def ::die-side #{::blast ::chicken ::cow ::human ::spaceship})
+(s/def ::dice (s/keys :req [::blast ::chicken ::cow ::human ::spaceship]))
 
 (s/fdef roll-die
         :args (s/cat)
@@ -16,24 +21,25 @@
 (defn roll-die []
   (let [die (rand-int 6)]
     (case die
-      0 :blast
-      1 :chicken
-      2 :cow
-      3 :human
-      :spaceship)))
-
+      0 ::blast
+      1 ::chicken
+      2 ::cow
+      3 ::human
+      ::spaceship)))
 
 (s/fdef roll-dice
         :args (s/cat :number pos-int?)
         :ret ::dice)
 
 (defn roll-dice [number]
-  (frequencies (repeatedly number roll-die)))
+  (let [number (min 100 number)]
+    (into )
+    (frequencies (repeatedly number roll-die))))
 
 
 (def empty-dice-set
-  {:cow 0
-   :human 0
-   :chicken 0
-   :blast 0
-   :spaceship 0})
+  {::cow 0
+   ::human 0
+   ::chicken 0
+   ::blast 0
+   ::spaceship 0})

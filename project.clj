@@ -5,6 +5,7 @@
                  [re-frame "0.10.2"]
                  [secretary "1.2.3"]
                  [garden "1.3.3"]
+                 [lein-doo "0.1.8"]
                  [ns-tracker "0.3.1"]]
 
   :plugins [[lein-cljsbuild "1.1.5"]
@@ -52,7 +53,7 @@
      :compiler     {:main                 martian-dice.core
                     :output-to            "resources/public/js/compiled/app.js"
                     :output-dir           "resources/public/js/compiled/dev-out"
-                    :asset-path           "js/compiled/out"
+                    :asset-path           "js/compiled/dev-out"
                     :source-map-timestamp true
                     :preloads             [devtools.preload
                                            day8.re-frame.trace.preload]

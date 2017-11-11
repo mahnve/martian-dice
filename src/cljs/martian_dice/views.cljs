@@ -40,9 +40,9 @@
   (let [saved-dice @(rf/subscribe [::subs/saved-dice])]
     [:ul
      (for [[dice no-of-dice] saved-dice]
-       [:li 
-        [:p  dice]
-        [:p no-of-dice]])]))
+       ^{:key (str dice)} [:li 
+                           [:p  dice]
+                           [:p no-of-dice]])]))
 
 (defn is-selected? [die selected-dice]
   (if (some #{die} selected-dice)
