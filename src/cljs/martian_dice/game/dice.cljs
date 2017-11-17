@@ -1,6 +1,7 @@
 (ns martian-dice.game.dice
   (:require  [cljs.spec.alpha :as s]
-             [cljs.spec.gen.alpha :as gen]))
+             [cljs.spec.gen.alpha :as gen]
+             [taoensso.timbre :as log]))
 
 
 (s/def ::score (s/or :positive pos-int? :zero zero?) )
@@ -31,14 +32,14 @@
         :args (s/cat :number pos-int?)
         :ret ::dice)
 
+(def empty-dice-set {::cow 0
+                     ::human 0
+                     ::chicken 0
+                     ::blast 0
+                     ::spaceship 0})
+
 (defn roll-dice [number]
   (let [number (min 100 number)]
     (into empty-dice-set 
           (frequencies (repeatedly number roll-die)))))
 
-(def empty-dice-set
-  {::cow 0
-   ::human 0
-   ::chicken 0
-   ::blast 0
-   ::spaceship 0})

@@ -1,16 +1,16 @@
 (defproject martian-dice "0.1.0-SNAPSHOT"
   :dependencies [[org.clojure/clojure "1.8.0"]
-                 [org.clojure/clojurescript "1.9.908"]
+                 [org.clojure/clojurescript "1.9.946"]
                  [reagent "0.7.0"]
                  [re-frame "0.10.2"]
                  [secretary "1.2.3"]
-                 [garden "1.3.3"]
                  [lein-doo "0.1.8"]
-                 [ns-tracker "0.3.1"]]
+                 [ns-tracker "0.3.1"]
+                 [stylefy "1.1.0"]
+                 [com.taoensso/timbre "4.10.0"]]
 
   :plugins [[lein-cljsbuild "1.1.5"]
-            [lein-doo "0.1.8"]
-            [lein-garden "0.2.8"]]
+            [lein-doo "0.1.8"]]
 
   :min-lein-version "2.5.3"
 
@@ -20,12 +20,6 @@
                                     "resources/public/css"]
 
   :figwheel {:css-dirs ["resources/public/css"]}
-
-  :garden {:builds [{:id           "screen"
-                     :source-paths ["src/clj"]
-                     :stylesheet   martian-dice.css/screen
-                     :compiler     {:output-to     "resources/public/css/screen.css"
-                                    :pretty-print? true}}]}
 
   :repl-options {:nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
 

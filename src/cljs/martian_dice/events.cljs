@@ -1,7 +1,8 @@
 (ns martian-dice.events
   (:require [re-frame.core :as rf]
             [martian-dice.db :as db]
-            [martian-dice.game.game :as game]))
+            [martian-dice.game.game :as game]
+            [taoensso.timbre :as log]))
 
 (rf/reg-event-db
  ::initialize-db
@@ -34,6 +35,7 @@
 (rf/reg-event-db
  ::start-new-game
  (fn [db _]
+   (log/info "starting new game")
    (-> db
        (db/with-view :game-panel)
        (db/with-game game/new-game))))

@@ -1,8 +1,8 @@
 (ns martian-dice.game.game
   (:require [martian-dice.game.dice :as dice]
             [cljs.spec.alpha :as s]
-            [cljs.spec.gen.alpha :as gen]))
-
+            [cljs.spec.gen.alpha :as gen]
+            [taoensso.timbre :as log]))
 
 (s/def ::no-of-dice pos-int?)
 (s/def ::selected-dice (s/or :die-side ::dice/die-side :none nil?))
@@ -14,8 +14,6 @@
 (s/fdef roll-dice
         :args (s/cat :game ::game)
         :ret ::game)
-
-(gen/sample  (s/gen ::game))
 
 (defn roll-dice [game]
   (assoc game :latest-roll (dice/roll-dice (:no-of-dice game))))
@@ -83,16 +81,13 @@
       (save-selected-dice)
       (clear-latest-roll)))
 
-(defn new-game 
-  ([]
-   {::current-player "Foo Bar"
-    ::new-turn true
-    ::no-of-dice 14
-    ::selected-dice nil
-    ::saved-dice dice/empty-dice-set
-    ::latest-roll dice/empty-dice-set
-    ::players [{:name "Foo Bar"
-                :score 0}]})
-  ([_]
-   (new-game)))
-
+(defn new-game
+  ([] {::current-player "Foo Bar"
+       ::new-turn true
+       ::no-of-dice 14
+       ::selected-dice nil
+       ::saved-dice dice/empty-dice-set
+       ::latest-roll dice/empty-dice-set
+       ::players [{:name "Foo Bar"
+                   :score 0}]})
+  ([_] (new-game)))

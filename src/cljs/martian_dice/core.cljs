@@ -3,6 +3,7 @@
             [re-frame.core :as re-frame]
             [martian-dice.events :as events]
             [martian-dice.routes :as routes]
+            [stylefy.core :as stylefy]
             [martian-dice.views :as views]
             [martian-dice.config :as config]))
 
@@ -18,7 +19,9 @@
                   (.getElementById js/document "app")))
 
 (defn ^:export init []
+  (js/console.log "init")
   (routes/app-routes)
   (re-frame/dispatch-sync [::events/initialize-db])
+  (stylefy/init)
   (dev-setup)
   (mount-root))
