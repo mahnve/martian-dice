@@ -1,8 +1,8 @@
 (ns martian-dice.views
   (:require [martian-dice.subs :as subs]
             [martian-dice.events :as events]
-            [re-frame.core :as rf]))
-
+            [re-frame.core :as rf]
+            [stylefy.core :as s]))
 
 ;; home
 
@@ -12,11 +12,13 @@
 
 ;; about
 
+
+
 (defn players-component []
   (let [players (rf/subscribe [::subs/players])]
-    [:div
+    [:div.row
      [:h2 "Players"]
-     [:ul
+     [:ul.column
       (for [{:keys [:name :score]} @players]
         [:li{:key name}
          [:label "Name:"]
@@ -44,10 +46,10 @@
                            [:p  dice]
                            [:p no-of-dice]])]))
 
-(defn is-selected? [die selected-dice]
+(defn is-selected [die selected-dice]
   (if (some #{die} selected-dice)
-    "selected"
-    "unselected"))
+    {:background-color "#Dcdcdc"}
+    {:background-color "#FFFFFF"}))
 
 (defn last-roll-component []
   (let [last-roll @(rf/subscribe [::subs/latest-roll])
@@ -55,9 +57,9 @@
     [:div.last-roll
      [:ul
       (for [[dice no-of-dice] last-roll]
-        [:li {:on-click #(rf/dispatch [::events/select-dice dice])
-              :class (is-selected? dice selected-dice)
-              :key (str dice)}
+        [:li (merge (s/use-style (is-selected dice selected-dice))
+                    {:on-click #(rf/dispatch [::events/select-dice dice])
+                     :key (str dice)})
          [:p  dice]
          [:p no-of-dice]])]]))
 
@@ -68,8 +70,7 @@
    (roll-dice-component)
    (end-turn-component)
    (new-game-component)
-   (saved-dice-component)
-   ])
+   (saved-dice-component)])
 
 ;; main
 
