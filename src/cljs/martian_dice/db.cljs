@@ -11,6 +11,5 @@
 
 (def default-db
   {:name "martian-dice"
-   :view-state {:active-panel :home-panel
-                :game-panel {:selected-dice nil}}
+   :view-state {:active-panel :home-panel}
    :game (game/new-game)})

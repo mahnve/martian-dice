@@ -15,28 +15,25 @@
         :args (s/cat :game ::game)
         :ret ::game)
 
-(defn roll-dice [game]
-  (assoc game :latest-roll (dice/roll-dice (:no-of-dice game))))
-
 (s/fdef select-dice
         :args (s/cat :game ::game :dice ::dice/die-side)
         :ret ::game)
 
 (defn select-dice [game dice]
-  (assoc game :selected-dice dice))
+  (assoc game ::selected-dice dice))
 
 (s/fdef selected-dice
         :args (s/cat)
         :ret ::dice/die-side)
 
 (defn selected-dice [game]
-  [(get game :selected-dice) ::dice/blast] )
+  [(get game ::selected-dice) ::dice/blast] )
 
 (defn total-no-of-dice [game]
-  (:no-of-dice game))
+  (::no-of-dice game))
 
 (defn no-of-rolled-dice [game selected-dice]
-  (get-in game [:latest-roll selected-dice]))
+  (get-in game [::latest-roll selected-dice]))
 
 (defn no-of-selected-dice [game]
   (reduce +
@@ -70,11 +67,11 @@
                      (::blast latest-roll))))))
 
 (defn clear-latest-roll [game]
-  (assoc game :latest-roll dice/empty-dice-set))
+  (assoc game ::latest-roll dice/empty-dice-set))
 
 
 (defn saved-dice [game]
-  (:saved-dice game))
+  (::saved-dice game))
 
 (defn end-turn [game]
   (-> game

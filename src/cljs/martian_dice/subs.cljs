@@ -1,6 +1,7 @@
 (ns martian-dice.subs
   (:require [re-frame.core :as rf]
-            [martian-dice.game.game :as game]))
+            [martian-dice.game.game :as game]
+            [taoensso.timbre :as log]))
 
 
 (rf/reg-sub
@@ -21,9 +22,10 @@
 (rf/reg-sub
  ::players
  (fn [db _]
-   (get-in db [:game :players])))
+   (log/info db)
+   (get-in db [:game ::game/players])))
 
 (rf/reg-sub
  ::latest-roll
  (fn [db _]
-   (get-in db [:game :latest-roll])))
+   (get-in db [:game ::game/latest-roll])))
