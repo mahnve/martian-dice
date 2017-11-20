@@ -37,8 +37,8 @@
 
 (defn no-of-selected-dice [game]
   (reduce +
-          (for [d [::dice/chicken, ::dice/cow, ::dice/human]]
-            (get-in game [::selected-dice ::dice/human]))))
+          (for [dice [::dice/chicken, ::dice/cow, ::dice/human]]
+            (get-in game [::selected-dice dice]))))
 
 (defn can-select-dice [game dice]
   (> (no-of-rolled-dice game dice) 0))
