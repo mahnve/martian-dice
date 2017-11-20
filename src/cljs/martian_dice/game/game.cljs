@@ -37,21 +37,21 @@
 
 (defn no-of-selected-dice [game]
   (reduce +
-          (for [d [::chicken, ::cow, ::human]]
-            (get-in game [:selected-dice ::human]))))
+          (for [d [::dice/chicken, ::dice/cow, ::dice/human]]
+            (get-in game [::selected-dice ::dice/human]))))
 
 (defn can-select-dice [game dice]
   (> (no-of-rolled-dice game dice) 0))
 
 (defn save-selected-dice
-  [{:keys [:selected-dice] :as game}]
+  [{:keys [::selected-dice] :as game}]
   (if (can-select-dice game selected-dice)
     (assoc-in game
-              [:saved-dice selected-dice]
+              [::saved-dice selected-dice]
               (no-of-rolled-dice game selected-dice))))
 
 (defn no-of-blasts [game]
-  (get-in game [::selected-dice ::blast]))
+  (get-in game [::selected-dice ::dice/blast]))
 
 (defn no-of-dice-to-roll [game]
   (- (total-no-of-dice game)
@@ -61,9 +61,9 @@
 (defn roll-dice [game]
   (let [latest-roll (dice/roll-dice (no-of-dice-to-roll game))]
     (-> game
-        (assoc :latest-roll latest-roll)
-        (assoc-in [:saved-dice ::blast]
-                  (+ (get-in game [:saved-dice ::blast])
+        (assoc ::latest-roll latest-roll)
+        (assoc-in [::saved-dice ::dice/blast]
+                  (+ (get-in game [::saved-dice ::dice/blast])
                      (::blast latest-roll))))))
 
 (defn clear-latest-roll [game]
