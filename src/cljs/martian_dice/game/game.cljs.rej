@@ -1,0 +1,15 @@
+diff a/src/cljs/martian_dice/game/game.cljs b/src/cljs/martian_dice/game/game.cljs	(rejected hunks)
+@@ -54,9 +54,10 @@
+   (get-in game [::selected-dice ::dice/blast]))
+ 
+ (defn no-of-dice-to-roll [game]
+-  (- (total-no-of-dice game)
+-     (no-of-blasts game)
+-     (no-of-selected-dice game)))
++  (- (-> game
++         total-no-of-dice
++         no-of-blasts
++         no-of-selected-dice)))
+ 
+ (defn roll-dice [game]
+   (let [latest-roll (dice/roll-dice (no-of-dice-to-roll game))]

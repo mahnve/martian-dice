@@ -26,7 +26,9 @@
 
 (rf/reg-event-db
  ::roll-dice
- (fn [db _] (db/with-game db game/roll-dice)))
+ (fn [db _] (-> db
+                (db/with-game game/prepare-throw)
+                (db/with-game game/roll-dice))))
 
 (rf/reg-event-db
  ::new-game
@@ -35,7 +37,6 @@
 (rf/reg-event-db
  ::start-new-game
  (fn [db _]
-   (log/info "starting new game")
    (-> db
        (db/with-view :game-panel)
        (db/with-game game/new-game))))

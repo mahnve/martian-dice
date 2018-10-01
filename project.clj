@@ -1,12 +1,12 @@
 (defproject martian-dice "0.1.0-SNAPSHOT"
-  :dependencies [[org.clojure/clojure "1.8.0"]
+  :dependencies [[org.clojure/clojure "1.9.0"]
                  [org.clojure/clojurescript "1.9.946"]
                  [reagent "0.7.0"]
-                 [re-frame "0.10.2"]
+                 [re-frame "0.10.4"]
                  [secretary "1.2.3"]
                  [lein-doo "0.1.8"]
                  [ns-tracker "0.3.1"]
-                 [stylefy "1.1.0"]
+                 [stylefy "1.2.0"]
                  [com.taoensso/timbre "4.10.0"]]
 
   :plugins [[lein-cljsbuild "1.1.5"]
@@ -28,10 +28,10 @@
    {:build "test"
     }
    :dev
-   {:dependencies [[binaryage/devtools "0.9.7"]
+   {:dependencies [[binaryage/devtools "0.9.9"]
                    [org.clojure/test.check "0.9.0"]
-                   [cljsjs/d3 "4.3.0-5"]
-                   [day8.re-frame/trace "0.1.11"]
+                   [cljsjs/d3 "4.12.0-0"]
+                   [day8.re-frame/trace "0.1.18"]
                    [figwheel-sidecar "0.5.14"]
                    [com.cemerick/piggieback "0.2.2"]]
 

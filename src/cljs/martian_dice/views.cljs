@@ -4,14 +4,11 @@
             [re-frame.core :as rf]
             [stylefy.core :as s]))
 
-;; home
+;;home
 
 (defn home-panel []
   [:div (str "Hello from " ". This is the home Page.")
    [:div [:a {:href "#/new"} "Start new game"]]])
-
-;; about
-
 
 
 (defn players-component []
@@ -42,8 +39,8 @@
   (let [saved-dice @(rf/subscribe [::subs/saved-dice])]
     [:ul
      (for [[dice no-of-dice] saved-dice]
-       ^{:key (str dice)} [:li 
-                           [:p  dice]
+       ^{:key (str dice)} [:li
+                           [:p dice]
                            [:p no-of-dice]])]))
 
 (defn is-selected [die selected-dice]
@@ -63,14 +60,18 @@
          [:p  dice]
          [:p no-of-dice]])]]))
 
+(def grid-wrap {:display "grid"
+                :grid-gap "20px"})
+
 (defn game-panel []
-  [:div "This is the Game Page."
+  [:div (s/use-style grid-wrap) 
    (players-component)
    (last-roll-component)
    (roll-dice-component)
+   (saved-dice-component)
    (end-turn-component)
    (new-game-component)
-   (saved-dice-component)])
+   ])
 
 ;; main
 
@@ -86,4 +87,3 @@
 (defn main-panel []
   (let [active-panel (rf/subscribe [::subs/active-panel])]
     [show-panel @active-panel]))
-

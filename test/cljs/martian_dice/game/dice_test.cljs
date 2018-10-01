@@ -8,11 +8,11 @@
 (defn summarize-results' [spec-check]
   (map (comp #(pprint/write % :stream nil) stest/abbrev-result) spec-check))
 
-(defn check' [spec-check]
+(defn valid-check? [spec-check]
   (is (nil? (-> spec-check first :failure)) (summarize-results' spec-check)))
 
 (deftest test-die
-  (is (check' (stest/check `dice/roll-die))))
+  (is (valid-check? (stest/check `dice/roll-die))))
 
 (deftest test-dice
-  (is (check' (stest/check `dice/roll-dice))))
+  (is (valid-check? (stest/check `dice/roll-dice))))

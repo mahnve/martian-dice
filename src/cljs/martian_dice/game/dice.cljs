@@ -42,4 +42,3 @@
   (let [number (min 100 number)]
     (into empty-dice-set 
           (frequencies (repeatedly number roll-die)))))
-

@@ -22,10 +22,9 @@
 (rf/reg-sub
  ::players
  (fn [db _]
-   (log/info db)
    (get-in db [:game ::game/players])))
 
 (rf/reg-sub
  ::latest-roll
- (fn [db _]
-   (get-in db [:game ::game/latest-roll])))
+ (fn [{:keys [:game]} _]
+   (game/latest-roll game)))
