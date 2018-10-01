@@ -37,12 +37,13 @@
 
 (defn saved-dice-component []
   (let [saved-dice @(rf/subscribe [::subs/saved-dice])]
-    [:ul
-     (for [[dice no-of-dice] saved-dice]
-       ^{:key (str dice)} [:li
-                           [:p dice]
-                           [:p no-of-dice]])]))
-
+    [:div.saved-dice
+     [:h2 "Saved Dice"]
+     [:ul
+      (for [[dice no-of-dice] saved-dice]
+        ^{:key (str dice)} [:li 
+                            [:p  dice]
+                            [:p no-of-dice]])]]))
 (defn is-selected [die selected-dice]
   (if (some #{die} selected-dice)
     {:background-color "#Dcdcdc"}
@@ -52,6 +53,7 @@
   (let [last-roll @(rf/subscribe [::subs/latest-roll])
         selected-dice @(rf/subscribe [::subs/selected-dice])]
     [:div.last-roll
+     [:h2 "Latest Roll"]
      [:ul
       (for [[dice no-of-dice] last-roll]
         [:li (merge (s/use-style (is-selected dice selected-dice))
